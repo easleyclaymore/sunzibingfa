@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>07.军争篇 - 孙子兵法</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="theme/pagetoc.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">孙子兵法</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- Page table of contents -->
+                        <div class="sidetoc"><nav class="pagetoc"></nav></div>
+
+                        <h1 id="军争篇"><a class="header" href="#军争篇">军争篇</a></h1>
+<h2 id="原文"><a class="header" href="#原文">原文</a></h2>
+<p>孙子曰：凡用兵之法，将受命于君，合军聚众，交和而舍，莫难于军争。军争之难者，以迂为直，以患为利。</p>
+<p>故迂其途，而诱之以利，后人发，先人至，此知迂直之计者也。军争为利，军争为危。举军而争利则不及，委军而争利则辎重捐。是故卷甲而趋，日夜不处，倍道兼行，百里而争利，则擒三将军，劲者先，疲者后，其法十一而至；五十里而争利，则蹶上将军，其法半至；三十里而争利，则三分之二至。是故军无辎重则亡，无粮食则亡，无委积则亡。故不知诸侯之谋者，不能豫交；不知山林、险阻、沮泽之形者，不能行军；不用乡导者，不能得地利。故兵以诈立，以利动，以分合为变者也。故其疾如风，其徐如林，侵掠如火，不动如山，难知如阴，动如雷震。掠乡分众，廓地分利，悬权而动。先知迂直之计者胜，此军争之法也。</p>
+<p>《军政》曰：“言不相闻，故为之金鼓；视不相见，故为之旌旗。”夫金鼓旌旗者，所以一民之耳目也。民既专一，则勇者不得独进，怯者不得独退，此用众之法也。故夜战多金鼓，昼战多旌旗，所以变人之耳目也。</p>
+<p>三军可夺气，将军可夺心。是故朝气锐，昼气惰，暮气归。善用兵者，避其锐气，击其惰归，此治气者也。以治待乱，以静待哗，此治心者也。以近待远，以佚待劳，以饱待饥，此治力者也。无邀正正之旗，勿击堂堂之阵，此治变者也。</p>
+<p>故用兵之法，高陵勿向，背丘勿逆，佯北勿从，锐卒勿攻，饵兵勿食，归师勿遏，围师遗阙，穷寇勿迫，此用兵之法也。</p>
+<h2 id="译文"><a class="header" href="#译文">译文</a></h2>
+<p>孙子说：用兵的原则，从将帅接受国君命令，聚集民众组成军队，到开赴战场与敌对峙，没有比率先争得有利先机、掌握主动权更困难的了。军队争取先机之利中最困难的地方就在于以迂回进军的方式实现更快到达预定战场的目的，把看似不利的条件变为有利的条件。</p>
+<p>所以，由于我们迂回前进，又用利益来诱惑敌人，使敌人不知我意欲何去，因而后于敌人发动，却先于敌人到达目的地。能这么做，就是知道迂直之计的人。“军争”既有有利的一面，也有不利的一面。率领全部携带装备辎重的军队前去争利则不能按时到达；如果扔下一部分军队去争利，则装备辎重将会受到损失。卷甲急进，白天黑夜不休息地急行军，若奔赴百里，一意争利，则三将的将领会成为敌之俘虏。士卒身强力壮者先到，疲弱者滞后掉队，这种做法只有十分之一兵力能到位；强行军五十里去争利，则前军将领会受挫折，而军士一般仅有一半如期到达；强行军三十里去争利，则士卒也仅能有三分之二到位。这样，部队没有辎重就不能生存，没有粮食供应就不能生存，没有战备物资储备就无以生存。所以说不了解诸侯各国的图谋，就不要轻易与他们打交道；不知道山林、险阻和沼泽的地形分布，不能行军作战；不使用向导，就不能掌握和利用有利的地形。所以，用兵打仗要以谋略来取得胜利，以利益作为行动的目的，以分散与集中作为变化手段。按照战场形势的需要，部队行动迅速时，如狂风飞旋；行进从容时，如森林徐徐展开；攻城掠地时，如烈火迅猛；驻守防御时，如大山岿然；军情隐蔽时，如乌云蔽日；大军出动时，如雷霆万钧。夺取敌方的财物，掳掠百姓，应分兵行动。扩张领土，分夺利益，应该分兵扼守要害之地。这些都应该权衡利弊，根据实际情况，相机行事。只有率先知道“迂直之计”的将帅，才能赢得胜利，这是军争所应遵循的原则。</p>
+<p>《军政》说：“战场上说话指挥，听不清或听不见，所以设置了金鼓；用手势来指挥，看不清或看不见，所以用旌旗。”金鼓、旌旗，是用来统一士兵的视听的。军队的行动统一整齐，那么勇敢的士兵就不能单独冒进，胆怯的士兵也不敢独自后退。这就是指挥大军作战的方法。所以，夜间作战大多用金鼓指挥，白天打仗多使用旌旗指挥。这是用来扰乱敌人视听的。</p>
+<p>对于敌方的军队，可以挫伤其士气；对于敌军的将帅，也可以动摇他的决心，使其丧失斗志。所以，刚列好阵势时，士气必盛；半天不开战，士气就低落；整日不接战，人心思归，其气益衰。善于统兵打仗的人，总是会避开敌人锐气强盛的时候，趁其士气衰竭时才发动攻击。这就是正确运用士气的原则。用治理严整的我军来对付军政混乱的敌军，用我镇定平稳的军心来对付军心躁动的敌人。这就是从心理上制伏、战胜敌人的办法。用就近进入战场的部队来等待长途奔袭的敌军，用休整良好的部队对付仓促疲劳的敌军；饱食的部队对付饥饿的部队，这就是从体力上制伏、战胜敌人的办法。不要去迎击旗帜整齐、部伍统一的军队，不要去攻击阵容整肃、士气饱满的军队，这是懂得战场上的随机应变。</p>
+<p>所以，用兵的原则是：对占据高地、背倚丘陵之敌，不要作正面仰攻；对于假装败逃之敌，不要跟踪追击；敌人的精锐部队不要强攻；敌人的诱饵之兵，不要贪食；对正在向本土撤退的部队不要去阻截；对被包围的敌军，要预留缺口；对于陷入绝境的敌人，不要过分逼迫，这些都是用兵的基本原则。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="06.虚实篇.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="08.九变篇.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="06.虚实篇.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="08.九变篇.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/pagetoc.js"></script>
+
+
+    </div>
+    </body>
+</html>
